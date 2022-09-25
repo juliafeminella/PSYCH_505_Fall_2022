@@ -3,6 +3,7 @@
 #Divide 5/2 (integer format) and 5.0/2.0 (float format). Does python output the same values for these? (You might get a different answer depending on the version of python you are in). If you got a different answer for the two operations, explain why.
 print(5/2)
 print(5.0/2.0)
+
 # There was no difference between the operations
 
 print (7 % 2)
