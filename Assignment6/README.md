@@ -54,7 +54,7 @@ sub_dir = os.path.join(main_dir,'sub_info',filename) #create a subject info dire
 
 > When you set a variable as 'fixed' a field that can't be edited is added to the dialog box. 
 
-# Monitorand window exercises
+# Monitor and window exercises
 
 1. How does changing "units" affect how you define your window size?
 > In Psychopy you can specify your stimulus in various unities of measure and the program will calculate the appropriate pixel size for you. Changing the unity might result in different sizes and angles
@@ -82,6 +82,8 @@ For this, I included all the answers in one code. I hope that's okay.
 Check the psychopy help page on "ImageStim" to help you solve these exercises:
 
 1. Write a short script that shows different face images from the image directory at 400x400 pixels in size. What does this do to the images? How can you keep the proper image dimensions and still change the size?
+> This ensures every image is 400 x 400, which may cause distortions. You can adjust size by this using a calculated ratio (e.g. stim.size[1] / stim.size[0]) instead of just altering the units.
+
 2. Write a short script that makes one image appear at a time, each in a different quadrant of your screen (put the window in fullscreen mode). Think about how you can calculate window locations without using a trial-and-error method.
 3. Create a fixation cross stimulus (hint:text stimulus).
 4. Fill in the following pseudocode with the real code you have learned so far:
@@ -107,7 +109,11 @@ image_dir = os.path.join(main_dir,'images')
 
 pic_loc = os.path.join(image_dir,'face01.jpg') #point to the specific image
 
-my_image = visual.ImageStim(win, image=pic_loc, units = 'pix', size = [400,400]) #image= the specific image (the entire directory)
+my_image = visual.ImageStim(win, image=pic_loc, units = 'pix', size = [400,400]) #size of image
+
+x_pos = [-200,200,-200,200]
+y_pos = [-600,600,-600,600]
+coordinates = list(zip(x_pos, y_pos)) # list of coordinates based on size of monitor so each image is in the center of each quadrant
 
 stims = ['face01.png', 'face02.png','face03.png','face04.png']
 
@@ -151,7 +157,7 @@ for block in range(nBlocks):
     for trial in range(nTrials):
         #-set stimuli and stimulus properties for the current trial
         my_image.image = os.path.join(image_dir,stims[trial])
-        
+        my_image.pos = coordinates[trial]
 
         #=====================
         #START TRIAL
